@@ -4,6 +4,7 @@
 ## Caveats:
 The builds produced by these scripts are wayland-only and without VAAPI or VDPAU support.
 All X11 and EGL features have been disabled to make this feasible. Hardware acceleration works through waylandvk, so I don't think we're missing out on much here. DRM rendering also works.
+Pipewire works and ALSA should too, but it's untested.
 
 This project also does stupid things (because we can) like statically link libpipewire and libvulkan. It probably won't hurt anything and gets the ldd count down for the binary.
 <br/>
@@ -14,6 +15,7 @@ Afterwards, **./build.sh** can be run without any prepended environment variable
 
 The main script (build.sh) propagates environment variables to the check and build scripts for each repo.
 When no environment variables are specified, each repo will only rebuild after successfully pulling changes via git pull. This assumes they're on a branch.
+The binary will be in repos/mpv/build after it's built.
 <br/>
 <br/>
 ### SKIP="anything"
