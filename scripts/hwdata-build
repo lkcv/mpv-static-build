@@ -1,0 +1,6 @@
+#!/bin/sh
+
+cd "$BUILD/repos/hwdata"
+
+./configure --prefix="$BUILD/build_libs" --libdir="$BUILD/build_libs/lib"
+make install

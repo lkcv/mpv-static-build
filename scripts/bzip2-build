@@ -1,0 +1,10 @@
+#!/bin/sh
+
+cd "$BUILD/repos/bzip2"
+rm -rf build
+
+cmake -S . -B build -GNinja -DCMAKE_INSTALL_PREFIX="$BUILD/build_libs" -DCMAKE_BUILD_TYPE=Release -DENABLE_STATIC_LIB=ON -DENABLE_SHARED_LIB=OFF -DCMAKE_POSITION_INDEPENDENT_CODE=ON
+ninja install -C build
+
+#pc file doesn't reference the former
+cp "$BUILD/build_libs/lib/libbz2_static.a" "$BUILD/build_libs/lib/libbz2.a"

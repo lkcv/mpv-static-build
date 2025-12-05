@@ -1,0 +1,34 @@
+#!/bin/bash
+
+if [[ -v SKIP ]]; then
+    printf "Skipping wayland-protocols check\n"
+    exit 0
+fi
+
+if [ ! -d "$BUILD/repos/wayland-protocols" ]; then
+    git clone https://gitlab.freedesktop.org/wayland/wayland-protocols "$BUILD/repos/wayland-protocols"
+fi
+
+cd "$BUILD/repos/wayland-protocols"
+
+if [[ -n "$TAG" ]]; then
+    git fetch --tags --force --all
+    current_tag="$(git describe --exact-match --tags 2>/dev/null || true)"
+
+    if [[ "$current_tag" != "$TAG" ]]; then
+        printf "Switching to tag $TAG\n"
+
+        #determine if we're on an undetached branch. if we are, then we need to pull
+        if ! (git checkout $TAG 2>&1 | grep -qE '(HEAD is now at|Your branch is up to date)'); then
+            git -C "$BUILD/repos/wayland-protocols" pull 2>&1
+        fi
+
+        REBUILD="wayland-protocols"
+    fi
+fi
+
+if [[ "$CLEAN_BUILD" == "yes" ]] || [[ "$REBUILD" == "wayland-protocols" ]] || ! ( git pull 2>&1 | grep -qE '(Already up to date|You are not currently on a branch)' ); then
+    "$BUILD/scripts/wayland-protocols-build"
+else
+    printf "Nothing to update for wayland-protocols\n"
+fi

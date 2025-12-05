@@ -1,0 +1,8 @@
+#!/bin/sh
+
+cd "$BUILD/repos/harfbuzz"
+
+rm -rf build
+
+meson setup build -Dprefer_static=true -Dbuildtype=release --prefix=$BUILD/build_libs -Ddefault_library=static
+ninja install -C build

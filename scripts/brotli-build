@@ -1,0 +1,7 @@
+#!/bin/sh
+
+cd "$BUILD/repos/brotli"
+rm -rf build
+
+cmake -S . -B build -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="$BUILD/build_libs" -DBUILD_SHARED_LIBS=OFF -DCMAKE_POSITION_INDEPENDENT_CODE=ON
+ninja install -C build

@@ -1,0 +1,11 @@
+#!/bin/sh
+
+cd "$BUILD/repos/Vulkan-Loader"
+rm -rf build
+
+cmake -S . -B build -GNinja -DVULKAN_HEADERS_INSTALL_DIR="$BUILD/build_libs/include/vulkan" -DBUILD_WSI_XCB_SUPPORT=OFF -DBUILD_WSI_XLIB_SUPPORT=OFF -DBUILD_WSI_XLIB_XRANDR_SUPPORT=OFF -DBUILD_SHARED_LIBS=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="$BUILD/build_libs" -DCMAKE_POSITION_INDEPENDENT_CODE=ON
+ninja install -C build
+
+ar rcs libvulkan.a $(find build -name '*.o')
+cp libvulkan.a $BUILD/build_libs/lib/
+printf "Stitched together libvulkan.a and copied it to $BUILD/build_libs/lib/libvulkan.a\n"

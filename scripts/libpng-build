@@ -1,0 +1,7 @@
+#!/bin/sh
+
+cd "$BUILD/repos/libpng"
+rm -rf build
+
+cmake -S . -B build -GNinja -DCMAKE_BUILD_TYPE=Release -DPNG_SHARED=OFF -DCMAKE_INSTALL_PREFIX="$BUILD/build_libs" -DCMAKE_POSITION_INDEPENDENT_CODE=ON
+ninja install -C build

@@ -1,0 +1,34 @@
+#!/bin/bash
+
+if [[ -v SKIP ]]; then
+    printf "Skipping fontconfig check\n"
+    exit 0
+fi
+
+if [ ! -d "$BUILD/repos/fontconfig" ]; then
+    git clone https://github.com/fontconfig/fontconfig "$BUILD/repos/fontconfig"
+fi
+
+cd "$BUILD/repos/fontconfig"
+
+if [[ -n "$TAG" ]]; then
+    git fetch --tags --force --all
+    current_tag="$(git describe --exact-match --tags 2>/dev/null || true)"
+
+    if [[ "$current_tag" != "$TAG" ]]; then
+        printf "Switching to tag $TAG\n"
+
+        #determine if we're on an undetached branch. if we are, then we need to pull
+        if ! (git checkout $TAG 2>&1 | grep -qE '(HEAD is now at|Your branch is up to date)'); then
+            git -C "$BUILD/repos/fontconfig" pull 2>&1
+        fi
+
+        REBUILD="fontconfig"
+    fi
+fi
+
+if [[ "$CLEAN_BUILD" == "yes" ]] || [[ "$REBUILD" == "fontconfig" ]] || ! ( git pull 2>&1 | grep -qE '(Already up to date|You are not currently on a branch)' ); then
+    "$BUILD/scripts/fontconfig-build"
+else
+    printf "Nothing to update for fontconfig\n"
+fi

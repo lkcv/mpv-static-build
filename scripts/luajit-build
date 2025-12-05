@@ -1,0 +1,8 @@
+#!/bin/sh
+
+cd "$BUILD/repos/luajit"
+make clean
+
+make BUILDMODE=static
+make install PREFIX="$BUILD/build_libs"
+

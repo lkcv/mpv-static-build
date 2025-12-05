@@ -1,0 +1,10 @@
+#!/bin/sh
+
+cd "$BUILD/repos/zimg"
+make distclean
+
+./autogen.sh --prefix=$BUILD/build_libs
+./configure --prefix=$BUILD/build_libs --enable-static --disable-shared
+
+make -j$(nproc)
+make install

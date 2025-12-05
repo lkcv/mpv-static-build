@@ -1,0 +1,16 @@
+#!/bin/sh
+
+cd "$BUILD/repos/SPIRV-Tools"
+rm -rf build
+
+if [ ! -d external/spirv-headers ]; then
+    git clone https://github.com/KhronosGroup/SPIRV-Headers external/spirv-headers
+fi
+
+git -q -C external/spirv-headers pull
+if [[ -n "$TAG" ]]; then
+    git -q -C external/spirv-headers checkout "$TAG"
+fi
+
+cmake -S . -B build -GNinja -DCMAKE_BUILD_TYPE=Release -DSPIRV_SKIP_TESTS=OFF -DCMAKE_INSTALL_PREFIX="$BUILD/build_libs" -DCMAKE_POSITION_INDEPENDENT_CODE=ON
+ninja install -C build

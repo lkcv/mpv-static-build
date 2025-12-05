@@ -1,0 +1,34 @@
+#!/bin/bash
+
+if [[ -v SKIP ]]; then
+    printf "Skipping SPIRV-Tools check\n"
+    exit 0
+fi
+
+if [ ! -d "$BUILD/repos/SPIRV-Tools" ]; then
+    git clone https://github.com/KhronosGroup/SPIRV-Tools "$BUILD/repos/SPIRV-Tools"
+fi
+
+cd "$BUILD/repos/SPIRV-Tools"
+
+if [[ -n "$TAG" ]]; then
+    git fetch --tags --force --all
+    current_tag="$(git describe --exact-match --tags 2>/dev/null || true)"
+
+    if [[ "$current_tag" != "$TAG" ]]; then
+        printf "Switching to tag $TAG\n"
+
+        #determine if we're on an undetached branch. if we are, then we need to pull
+        if ! (git checkout $TAG 2>&1 | grep -qE '(HEAD is now at|Your branch is up to date)'); then
+            git -C "$BUILD/repos/SPIRV-Tools" pull 2>&1
+        fi
+
+        REBUILD="SPIRV-Tools"
+    fi
+fi
+
+if [[ "$CLEAN_BUILD" == "yes" ]] || [[ "$REBUILD" == "SPIRV-Tools" ]] || ! ( git pull 2>&1 | grep -qE '(Already up to date|You are not currently on a branch)' ); then
+    "$BUILD/scripts/spirv-tools-build"
+else
+    printf "Nothing to update for SPIRV-Tools\n"
+fi

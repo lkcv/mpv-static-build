@@ -1,0 +1,7 @@
+#!/bin/sh
+
+cd "$BUILD/repos/libdrm"
+rm -rf build
+
+meson setup build -Dbuildtype=release -Ddefault_library=static -Dprefix=$BUILD/build_libs
+ninja install -C build

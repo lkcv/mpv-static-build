@@ -1,0 +1,34 @@
+#!/bin/bash
+
+if [[ -v SKIP ]]; then
+    printf "Skipping libxml2 check\n"
+    exit 0
+fi
+
+if [ ! -d "$BUILD/repos/libxml2" ]; then
+    git clone https://github.com/GNOME/libxml2 "$BUILD/repos/libxml2"
+fi
+
+cd "$BUILD/repos/libxml2"
+
+if [[ -n "$TAG" ]]; then
+    git fetch --tags --force --all
+    current_tag="$(git describe --exact-match --tags 2>/dev/null || true)"
+
+    if [[ "$current_tag" != "$TAG" ]]; then
+        printf "Switching to tag $TAG\n"
+
+        #determine if we're on an undetached branch. if we are, then we need to pull
+        if ! (git checkout $TAG 2>&1 | grep -qE '(HEAD is now at|Your branch is up to date)'); then
+            git -C "$BUILD/repos/libxml2" pull 2>&1
+        fi
+
+        REBUILD="libxml2"
+    fi
+fi
+
+if [[ "$CLEAN_BUILD" == "yes" ]] || [[ "$REBUILD" == "libxml2" ]] || ! ( git pull 2>&1 | grep -qE '(Already up to date|You are not currently on a branch)' ); then
+    "$BUILD/scripts/libxml2-build"
+else
+    printf "Nothing to update for libxml2\n"
+fi

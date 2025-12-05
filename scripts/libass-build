@@ -1,0 +1,7 @@
+#!/bin/sh
+
+cd "$BUILD/repos/libass"
+rm -rf build
+
+meson setup build -Dprefix="$BUILD/build_libs" -Ddefault_library=static
+ninja install -C build

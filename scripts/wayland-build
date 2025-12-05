@@ -1,0 +1,7 @@
+#!/bin/sh
+
+cd "$BUILD/repos/wayland"
+rm -rf build
+
+meson setup build -Dbuildtype=release -Ddocumentation=false -Dprefix=$BUILD/build_libs -Ddefault_library=static
+ninja install -C build

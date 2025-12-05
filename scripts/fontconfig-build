@@ -1,0 +1,7 @@
+#!/bin/sh
+
+cd "$BUILD/repos/fontconfig"
+rm -rf build
+
+meson setup build --prefix=$BUILD/build_libs -Ddefault_library=static -Dc_link_args="-L$BUILD/build_libs/lib -lbrotlidec -lbrotlicommon"
+ninja install -C build

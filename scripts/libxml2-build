@@ -1,0 +1,7 @@
+#!/bin/sh
+
+cd "$BUILD/repos/libxml2"
+rm -rf build
+
+meson setup build -Dprefer_static=true -Dbuildtype=release -Ddocs=disabled --prefix=$BUILD/build_libs -Ddefault_library=static -Dc_args='-fPIC' -Dc_link_args='-fPIC'
+ninja install -C build

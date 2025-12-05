@@ -1,0 +1,6 @@
+#!/bin/sh
+
+cd "$BUILD/repos/vapoursynth"
+
+meson setup build -Ddefault_library=static --prefix=$BUILD/build_libs
+ninja install -C build

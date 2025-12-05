@@ -1,0 +1,15 @@
+#!/bin/sh
+
+if test -f "$BUILD"/libplacebo_options ; then
+    IFS=$newline
+    set -- $(cat "$BUILD"/libplacebo_options) "$@"
+    unset -v IFS
+fi
+
+OPTIONS="-Ddefault_library=static -Dtests=false -Ddemos=false"
+
+cd "$BUILD/repos/libplacebo"
+rm -rf build
+
+meson setup build -Dprefer_static=true -Dprefix="$BUILD/build_libs" $OPTIONS "$@"
+ninja install -C build

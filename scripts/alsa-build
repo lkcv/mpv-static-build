@@ -1,0 +1,10 @@
+#!/bin/sh
+
+cd "$BUILD/repos/alsa-lib"
+make distclean
+
+autoreconf -fi
+./configure --prefix=$BUILD/build_libs --enable-static --disable-shared
+
+make -j$(nproc)
+make install

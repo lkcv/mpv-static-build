@@ -1,0 +1,14 @@
+#!/bin/sh
+
+export PKG_CONFIG_PATH="/usr/lib/pkgconfig:$PKG_CONFIG_PATH"
+export PKG_CONFIG_LIBDIR="usr/lib/pkgconfig:$PKG_CONFIG_LIBDIR"
+
+cd "$BUILD/repos/pipewire"
+rm -rf builddir
+
+meson setup builddir -Dprefix=$BUILD/build_libs -Dudev=disabled -Ddbus=disabled -Dlibsystemd=disabled -Dlogind=disabled -Drlimits-install=false -Dgsettings-pulse-schema=disabled -Dsystemd-user-service=disabled -Dpipewire-jack=disabled -Dtests=disabled -Dexamples=disabled
+ninja install -C builddir
+
+ar rcs libpipewire-0.3.a $(find builddir -name '*.o')
+cp libpipewire-0.3.a $BUILD/build_libs/lib/
+printf "Stitched together libpipewire-0.3.a and copied it to $BUILD/build_libs/lib/libpipewire-0.3.a\n"
