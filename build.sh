@@ -30,6 +30,7 @@ scripts/freetype-check
 scripts/harfbuzz-check 
 scripts/fontconfig-check 
 SKIP="yes" scripts/libjpeg-check 
+SKIP="yes" scripts/libsixel-check
 scripts/vulkan-headers-check 
 scripts/vulkan-loader-check 
 scripts/spirv-tools-check 
@@ -47,6 +48,7 @@ scripts/vapoursynth-check
 scripts/hwdata-check #optional for libdisplay-info
 scripts/libdisplay-info-check 
 scripts/libdrm-check 
+scripts/libdovi-check
 scripts/libplacebo-check 
 scripts/ffmpeg-check 
 scripts/uchardet-check 

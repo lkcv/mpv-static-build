@@ -1,0 +1,9 @@
+#!/bin/sh
+
+cd "$BUILD"/libsixel
+make distclean
+
+./configure --prefix="$BUILD/build_libs" --disable-shared --enable-static --without-libcurl --without-png
+make -j$(nproc)
+make install
+
