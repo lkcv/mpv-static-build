@@ -1,0 +1,8 @@
+#!/bin/sh
+
+cd "$BUILD/repos/dovi_tool/dolby_vision"
+cargo clean
+
+export RUSTFLAGS="-C target-feature=+crt-static -C link-self-contained=yes"
+cargo install cargo-c
+cargo cinstall --release --prefix $BUILD/build_libs --library-type staticlib
