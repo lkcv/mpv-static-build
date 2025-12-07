@@ -1,0 +1,10 @@
+#!/bin/sh
+
+cd "$BUILD/repos/mujs"
+make clean
+
+make -j$(nproc) release CFLAGS="-fPIC"
+make install-static prefix="$BUILD/build_libs"
+
+#patch pkgconfig file because it assumes it'll always be installed to /usr/local
+sed -i "s|/usr/local|$BUILD/build_libs|g" "$BUILD/build_libs/lib/pkgconfig/mujs.pc"

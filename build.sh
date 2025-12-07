@@ -45,6 +45,7 @@ scripts/libunibreak-check
 scripts/libass-check 
 scripts/zimg-check #needed for vapoursynth
 scripts/vapoursynth-check 
+SKIP="yes" scripts/mujs-check
 scripts/hwdata-check #optional for libdisplay-info
 scripts/libdisplay-info-check 
 scripts/libdrm-check 
