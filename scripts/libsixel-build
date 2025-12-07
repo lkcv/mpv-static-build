@@ -1,6 +1,6 @@
 #!/bin/sh
 
-cd "$BUILD"/repos/libsixel
+cd "$BUILD/repos/libsixel"
 make distclean
 
 ./configure --prefix="$BUILD/build_libs" --disable-shared --enable-static --without-libcurl --without-png

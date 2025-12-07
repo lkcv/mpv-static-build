@@ -1,0 +1,7 @@
+#!/bin/sh
+
+cd "$BUILD/repos/rubberband"
+rm -rf build
+
+meson setup build -Ddefault_library=static --prefix=$BUILD/build_libs
+ninja install -C build

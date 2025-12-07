@@ -55,5 +55,4 @@ REBUILD="SPIRV-Tools" scripts/spirv-tools-check
 
 ### TODO
 Figure out if musl can build all of these reliably<br/>
-Add mujs, libsixel, and rubberband in case anyone uses these<br/>
 Get v4l-utils detected by libdisplay-info
