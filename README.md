@@ -9,6 +9,13 @@ Pipewire works and ALSA should too, but it's untested.
 This project also does stupid things (because we can) like statically link libpipewire and libvulkan. It probably won't hurt anything and gets the ldd count down for the binary.
 <br/>
 <br/>
+## Features:
+* Vulkan and OpenGL (hardware accel probably won't work with the latter, but vulkan-hevc works with vulkan. probably need to disable OpenGL in the config since it's kneecapped in this build)
+* Wayland (waylandvk)
+* DRM (displayvk)
+* Pipewire
+* And most optional features are available. Check build.sh for a list of all build checks. Some features have been skipped by default. Refer to **Usage** below to enable them.
+
 ## Usage:
 For first-run builds, **CLEAN_BUILD="yes" ./build.sh** needs to be run for everything to compile since there wont' be another git state to check against.
 Afterwards, **./build.sh** can be run without any prepended environment variables.
@@ -54,5 +61,4 @@ REBUILD="SPIRV-Tools" scripts/spirv-tools-check
 ```
 
 ### TODO
-Figure out if musl can build all of these reliably<br/>
-Get v4l-utils detected by libdisplay-info
+Figure out if musl can build all of these reliably
