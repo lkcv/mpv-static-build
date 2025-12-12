@@ -10,7 +10,7 @@ This project also does stupid things (because we can) like statically link libpi
 <br/>
 <br/>
 ## Features:
-* Vulkan and OpenGL (hardware accel probably won't work with the latter, but vulkan-hevc works with vulkan. probably need to disable OpenGL in the config since it's kneecapped in this build)
+* Vulkan with hardware accel via vulkan-hevc
 * Wayland (waylandvk)
 * DRM (displayvk)
 * Pipewire
