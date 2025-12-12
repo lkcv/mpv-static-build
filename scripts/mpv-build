@@ -1,8 +1,5 @@
 #!/bin/sh
 
-newline="
-"
-
 export LDFLAGS="-static-libgcc -static-libstdc++"
 
 if test -f "$BUILD"/mpv_options ; then

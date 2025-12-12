@@ -1,0 +1,11 @@
+--enable-gpl
+--disable-debug
+--disable-doc
+--enable-static
+--disable-shared
+--enable-pic
+--disable-xlib
+--disable-libxcb
+--disable-indev=xcbgrab
+--disable-vdpau
+--disable-decoder=tiff

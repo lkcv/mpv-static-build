@@ -1,36 +1,19 @@
 #!/bin/sh
 
-
 echo() { printf %s\\n "$*"; }  # depends on standard IFS (which we have)
 
-
-
-OPTIONS="--enable-gpl --disable-debug --disable-doc --enable-static --disable-shared --enable-pic \
---disable-xlib --disable-libxcb --disable-indev=xcbgrab \
---disable-vdpau --disable-decoder=tiff" 
 rm -rf "$BUILD/ffmpeg_build"
 
-# Do FFmpeg's job.
-if ( echo "$OPTIONS" "$@" | \
-     grep -q -E -e "-openssl|-gnutls|-mbedtls|-libtls|-schannel|-securetransport" )
-then
-    echo TLS/SSL user option specified, skipping autodetection
-else
-    if pkg-config gnutls ; then
-        OPTIONS="$OPTIONS --enable-gnutls"
-        echo "Auto-enabling GnuTLS."
-    elif pkg-config openssl ; then
-        OPTIONS="$OPTIONS --enable-nonfree --enable-openssl"
-        echo "Auto-enabling OpenSSL (creates a non-redistributable binary)."
-    fi
+if test -f "$BUILD"/ffmpeg_options ; then
+    OPTIONS=($(xargs < "$BUILD/ffmpeg_options"))
 fi
 
-echo Using ffmpeg options: $OPTIONS "$@"
+echo "Using ffmpeg options: ${OPTIONS[@]}"
 
 mkdir -p "$BUILD/ffmpeg_build"
 cd "$BUILD/ffmpeg_build"
 
-"$BUILD/repos/ffmpeg/configure" --prefix="$BUILD/build_libs" $OPTIONS "$@"
+"$BUILD/repos/ffmpeg/configure" --prefix="$BUILD/build_libs" "${OPTIONS[@]}"
 
 cd "$BUILD"
-make -C "$BUILD/ffmpeg_build" install -j$(nproc) "$@"
+make -C "$BUILD/ffmpeg_build" install -j$(nproc)
