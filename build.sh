@@ -12,10 +12,11 @@ export CXXFLAGS="-fPIC"
 export PKG_CONFIG_LIBDIR="$BUILD/build_libs/lib/pkgconfig"
 export PKG_CONFIG_LIBDIR="$BUILD/build_libs/share/pkgconfig:$PKG_CONFIG_LIBDIR"
 
-if [[ "$CLEAN_BUILD" == "yes" ]]
-then
+if [[ "$CLEAN_BUILD" == "yes" ]]; then
     rm -rf "$BUILD/build_libs"
     rm -rf "$BUILD/repos"
+elif [ ! -d "$BUILD/build_libs" ]; then
+    export CLEAN_BUILD="yes"
 fi
 
 scripts/expat-check

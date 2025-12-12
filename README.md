@@ -17,8 +17,7 @@ This project also does stupid things (because we can) like statically link libpi
 * And most optional features are available. Check build.sh for a list of all build checks. Some features have been skipped by default. Refer to **Usage** below to enable them.
 
 ## Usage:
-For first-run builds, **CLEAN_BUILD="yes" ./build.sh** needs to be run for everything to compile since there wont' be another git state to check against.
-Afterwards, **./build.sh** can be run without any prepended environment variables.
+Just run **./build.sh**
 
 The main script (build.sh) propagates environment variables to the check and build scripts for each repo.
 When no environment variables are specified, each repo will only rebuild after successfully pulling changes via git pull. This assumes they're on a branch.
