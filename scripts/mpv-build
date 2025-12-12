@@ -2,20 +2,15 @@
 
 newline="
 "
-export LDFLAGS="-static-libgcc -static-libstdc++"
-if test -f "$BUILD"/mpv_options ; then
-    IFS=$newline
-    set -- $(cat "$BUILD"/mpv_options) "$@"
-    unset -v IFS
-fi
 
-echo Using mpv options: $OPTIONS "$@"
+export LDFLAGS="-static-libgcc -static-libstdc++"
+
+if test -f "$BUILD"/mpv_options ; then
+    OPTIONS=($(xargs < "$BUILD/mpv_options"))
+fi
 
 cd "$BUILD/repos/mpv"
 rm -rf build
 
-#SPIRV_STATIC="$(pkg-config --static --libs SPIRV-Tools)"
-
-#export LDFLAGS="$LDFLAGS $SPIRV_STATIC"
-meson setup build -Dprefer_static=true -Dbuildtype=release $OPTIONS "$@"
-meson compile -C build "$@"
+meson setup build -Dprefer_static=true -Dbuildtype=release "${OPTIONS[@]}"
+meson compile -C build
