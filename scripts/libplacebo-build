@@ -4,7 +4,7 @@ if test -f "$BUILD"/libplacebo_options ; then
     OPTIONS=($(xargs < "$BUILD/libplacebo_options"))
 fi
 
-echo "Using libplacebo options: ${OPTIONS[@]}"
+printf 'Using libplacebo options: %s\n' "${OPTIONS[*]}"
 
 cd "$BUILD/repos/libplacebo"
 rm -rf build

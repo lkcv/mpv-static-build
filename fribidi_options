@@ -1,0 +1,3 @@
+-Ddocs=false
+-Dbin=false
+-Dtests=false

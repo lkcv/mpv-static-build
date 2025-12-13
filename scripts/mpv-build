@@ -6,6 +6,8 @@ if test -f "$BUILD"/mpv_options ; then
     OPTIONS=($(xargs < "$BUILD/mpv_options"))
 fi
 
+printf 'Using mpv options: %s\n' "${OPTIONS[*]}"
+
 cd "$BUILD/repos/mpv"
 rm -rf build
 

@@ -1,19 +1,13 @@
 #!/bin/sh
 
-newline="
-"
-
 if test -f "$BUILD"/fribidi_options ; then
-    IFS=$newline
-    set -- $(cat "$BUILD"/fribidi_options) "$@"
-    unset -v IFS
+    OPTIONS=($(xargs < "$BUILD/fribidi_options"))
 fi
 
-OPTIONS="--enable-static --disable-shared --without-glib --with-pic"
+printf 'Using fribidi options: %s\n' "${OPTIONS[*]}"
 
 cd "$BUILD/repos/fribidi"
 rm -rf build
 
-meson setup build -Ddocs=false -Dbuildtype=release --prefix=$BUILD/build_libs -Ddefault_library=static
-ninja install -C build "$@"
-
+meson setup build -Dbuildtype=release --prefix=$BUILD/build_libs -Ddefault_library=static "${OPTIONS[@]}"
+ninja install -C build

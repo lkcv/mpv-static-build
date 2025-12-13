@@ -1,14 +1,12 @@
 #!/bin/sh
 
-echo() { printf %s\\n "$*"; }  # depends on standard IFS (which we have)
-
 rm -rf "$BUILD/ffmpeg_build"
 
 if test -f "$BUILD"/ffmpeg_options ; then
     OPTIONS=($(xargs < "$BUILD/ffmpeg_options"))
 fi
 
-echo "Using ffmpeg options: ${OPTIONS[@]}"
+printf 'Using ffmpeg options: %s\n' "${OPTIONS[*]}"
 
 mkdir -p "$BUILD/ffmpeg_build"
 cd "$BUILD/ffmpeg_build"
