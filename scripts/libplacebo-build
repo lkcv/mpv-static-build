@@ -1,10 +1,10 @@
 #!/bin/sh
 
-if test -f "$BUILD"/ffmpeg_options ; then
+if test -f "$BUILD"/libplacebo_options ; then
     OPTIONS=($(xargs < "$BUILD/libplacebo_options"))
 fi
 
-echo "Using ffmpeg options: ${OPTIONS[@]}"
+echo "Using libplacebo options: ${OPTIONS[@]}"
 
 cd "$BUILD/repos/libplacebo"
 rm -rf build
