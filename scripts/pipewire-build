@@ -5,10 +5,16 @@ export PKG_CONFIG_LIBDIR="usr/lib/pkgconfig:$PKG_CONFIG_LIBDIR"
 export PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH"
 export PKG_CONFIG_LIBDIR="usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_LIBDIR"
 
+if test -f "$BUILD"/pipewire_options ; then
+    OPTIONS=($(xargs < "$BUILD/pipewire_options"))
+fi
+
+printf 'Using pipewire options: %s\n' "${OPTIONS[*]}"
+
 cd "$BUILD/repos/pipewire"
 rm -rf builddir
 
-meson setup builddir -Dprefix=$BUILD/build_libs -Dudev=disabled -Ddbus=disabled -Dlibsystemd=disabled -Dlogind=disabled -Drlimits-install=false -Dgsettings-pulse-schema=disabled -Dsystemd-user-service=disabled -Dpipewire-jack=disabled -Dtests=disabled -Dexamples=disabled -Dpipewire-alsa=disabled
+meson setup builddir -Dprefix=$BUILD/build_libs "${OPTIONS[@]}"
 ninja install -C builddir
 
 ar rcs libpipewire-0.3.a $(find builddir -name '*.o')

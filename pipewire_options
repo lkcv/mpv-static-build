@@ -1,0 +1,12 @@
+-Dudev=disabled
+-Ddbus=disabled
+-Dlibsystemd=disabled
+-Dlogind=disabled
+-Drlimits-install=false
+-Dgsettings-pulse-schema=disabled
+-Dsystemd-user-service=disabled
+-Dpipewire-jack=disabled
+-Dtests=disabled
+-Dexamples=disabled
+-Dalsa=disabled
+-Dpipewire-alsa=disabled
