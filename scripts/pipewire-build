@@ -17,6 +17,14 @@ rm -rf builddir
 meson setup builddir -Dprefix=$BUILD/build_libs "${OPTIONS[@]}"
 ninja install -C builddir
 
+unset PKG_CONFIG_PATH
+export PKG_CONFIG_LIBDIR="$BUILD/build_libs/lib/pkgconfig"
+export PKG_CONFIG_LIBDIR="$BUILD/build_libs/share/pkgconfig:$PKG_CONFIG_LIBDIR"
+export PKG_CONFIG_LIBDIR="$BUILD/build_libs/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_LIBDIR"
+
 ar rcs libpipewire-0.3.a $(find builddir -name '*.o')
-cp libpipewire-0.3.a $BUILD/build_libs/lib/
-printf "Stitched together libpipewire-0.3.a and copied it to $BUILD/build_libs/lib/libpipewire-0.3.a\n"
+
+PIPEWIRE_PATH=$(pkg-config --libs-only-L libpipewire-0.3 | sed 's/^-L//')
+
+cp libpipewire-0.3.a "$PIPEWIRE_PATH"
+printf "Stitched together pipewire-0.3.a and copied it to $PIPEWIRE_PATH/libpipewire-0.3.a\n"

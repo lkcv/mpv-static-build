@@ -7,5 +7,8 @@ cmake -S . -B build -GNinja -DVULKAN_HEADERS_INSTALL_DIR="$BUILD/build_libs/incl
 ninja install -C build
 
 ar rcs libvulkan.a $(find build -name '*.o')
-cp libvulkan.a $BUILD/build_libs/lib/
-printf "Stitched together libvulkan.a and copied it to $BUILD/build_libs/lib/libvulkan.a\n"
+
+VULKAN_PATH=$(pkg-config --libs-only-L vulkan | sed 's/^-L//')
+
+cp libvulkan.a "$VULKAN_PATH"
+printf "Stitched together libvulkan.a and copied it to $VULKAN_PATH/libvulkan.a\n"
