@@ -1,6 +1,10 @@
 # mpv-static-build
 ## Collection of scripts to produce a mostly static build of mpv (only libc and libm are dynamically linked)<br/><br/>Inspired by the mpv-build project, so parts of some of the build scripts like ffmpeg are the same
 
+## Tested on:
+* Arch
+* Ubuntu 22.04 (in progress)
+
 ## Caveats:
 The builds produced by these scripts are wayland-only and without VAAPI or VDPAU support.
 All X11 and EGL features have been disabled to make this feasible. Hardware acceleration works through hevc-vulkan, so I don't think we're missing out on much here.
@@ -59,4 +63,5 @@ REBUILD="SPIRV-Tools" scripts/spirv-tools-check
 ```
 
 ### TODO
+Determine why mpv is still trying to link libasound (ALSA)
 Figure out if musl can build all of these reliably
