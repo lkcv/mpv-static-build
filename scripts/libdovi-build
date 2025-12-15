@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 cd "$BUILD/repos/dovi_tool/dolby_vision"
 cargo clean

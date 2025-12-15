@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # env vars to confine package search to just the static libraries we're building and to pass fPIC
 
@@ -11,6 +11,7 @@ export CXXFLAGS="-fPIC"
 
 export PKG_CONFIG_LIBDIR="$BUILD/build_libs/lib/pkgconfig"
 export PKG_CONFIG_LIBDIR="$BUILD/build_libs/share/pkgconfig:$PKG_CONFIG_LIBDIR"
+export PKG_CONFIG_LIBDIR="$BUILD/build_libs/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_LIBDIR"
 
 if [[ "$CLEAN_BUILD" == "yes" ]]; then
     rm -rf "$BUILD/build_libs"

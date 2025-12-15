@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if test -f "$BUILD"/fribidi_options ; then
     OPTIONS=($(xargs < "$BUILD/fribidi_options"))

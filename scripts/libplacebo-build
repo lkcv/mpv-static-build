@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if test -f "$BUILD"/libplacebo_options ; then
     OPTIONS=($(xargs < "$BUILD/libplacebo_options"))

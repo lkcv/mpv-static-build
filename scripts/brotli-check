@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if [[ -v SKIP ]]; then
     printf "Skipping brotli check\n"

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 cd "$BUILD/repos/rubberband"
 rm -rf build

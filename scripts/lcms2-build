@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 cd "$BUILD/repos/lcms2"
 rm -rf build

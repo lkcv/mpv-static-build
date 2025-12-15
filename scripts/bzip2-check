@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if [[ -v SKIP ]]; then
     printf "Skipping bzip2 check\n"
