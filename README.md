@@ -63,5 +63,4 @@ REBUILD="SPIRV-Tools" scripts/spirv-tools-check
 ```
 
 ### TODO
-Determine why mpv is still trying to link libasound (ALSA)
 Figure out if musl can build all of these reliably

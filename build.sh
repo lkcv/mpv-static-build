@@ -56,7 +56,7 @@ scripts/libdovi-check
 scripts/libplacebo-check 
 scripts/ffmpeg-check 
 scripts/uchardet-check 
-scripts/alsa-check 
+SKIP="yes" scripts/alsa-check 
 scripts/pipewire-check 
 TAG="master" scripts/mpv-check
 

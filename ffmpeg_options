@@ -9,3 +9,4 @@
 --disable-indev=xcbgrab
 --disable-vdpau
 --disable-decoder=tiff
+--disable-alsa
