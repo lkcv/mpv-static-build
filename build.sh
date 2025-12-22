@@ -13,6 +13,7 @@ export PKG_CONFIG_LIBDIR="$BUILD/build_libs/lib/pkgconfig"
 export PKG_CONFIG_LIBDIR="$BUILD/build_libs/share/pkgconfig:$PKG_CONFIG_LIBDIR"
 export PKG_CONFIG_LIBDIR="$BUILD/build_libs/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_LIBDIR"
 
+export PATH="$BUILD/build_libs/bin:$PATH"
 if [[ "$CLEAN_BUILD" == "yes" ]]; then
     rm -rf "$BUILD/build_libs"
     rm -rf "$BUILD/repos"

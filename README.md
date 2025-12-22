@@ -7,13 +7,13 @@
 
 ## Caveats:
 The builds produced by these scripts are wayland-only and without VAAPI or VDPAU support.
-All X11 and EGL features have been disabled to make this feasible. Hardware acceleration works through hevc-vulkan, so I don't think we're missing out on much here.
+All X11 and EGL features have been disabled to make this feasible. Hardware acceleration works through vulkan video, so I don't think we're missing out on much here.
 
 This project also does stupid things (because we can) like statically link libpipewire and libvulkan. It probably won't hurt anything and gets the ldd count down for the binary.
 <br/>
 <br/>
 ## Features:
-* Vulkan with hardware accel via vulkan-hevc
+* Vulkan with hardware accel decode via vulkan video (hevc and av1 work. vp9 should, but it's untested)
 * Wayland (waylandvk)
 * DRM (displayvk)
 * Pipewire
