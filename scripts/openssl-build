@@ -1,0 +1,15 @@
+#!/bin/bash
+
+cd "$BUILD/repos/openssl"
+make clean
+
+./Configure \
+    linux-x86_64 \
+    no-shared \
+    no-dso \
+    no-tests \
+    -static \
+    --prefix=$BUILD/build_libs
+
+make -j$(nproc)
+make install_sw

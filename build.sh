@@ -10,6 +10,7 @@ export CFLAGS="-fPIC"
 export CXXFLAGS="-fPIC"
 
 export PKG_CONFIG_LIBDIR="$BUILD/build_libs/lib/pkgconfig"
+export PKG_CONFIG_LIBDIR="$BUILD/build_libs/lib64/pkgconfig:$PKG_CONFIG_LIBDIR"
 export PKG_CONFIG_LIBDIR="$BUILD/build_libs/share/pkgconfig:$PKG_CONFIG_LIBDIR"
 export PKG_CONFIG_LIBDIR="$BUILD/build_libs/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_LIBDIR"
 
@@ -53,6 +54,8 @@ SKIP="yes" scripts/rubberband-check
 scripts/hwdata-check #optional for libdisplay-info
 scripts/libdisplay-info-check 
 scripts/libdrm-check 
+scripts/openssl-check
+scripts/curl-check
 scripts/libdovi-check
 scripts/libplacebo-check 
 scripts/ffmpeg-check 
